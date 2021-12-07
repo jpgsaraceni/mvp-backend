@@ -1,27 +1,9 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/go,linux,macos,windows
-# Edit at https://www.toptal.com/developers/gitignore?templates=go,linux,macos,windows
+# Created by https://www.toptal.com/developers/gitignore/api/linux,windows,macos,dotenv
+# Edit at https://www.toptal.com/developers/gitignore?templates=linux,windows,macos,dotenv
 
-### Go ###
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
-
-# Dependency directories (remove the comment below to include it)
-# vendor/
-
-### Go Patch ###
-/vendor/
-/Godeps/
+### dotenv ###
+.env
 
 ### Linux ###
 *~
@@ -93,4 +75,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/go,linux,macos,windows
+# End of https://www.toptal.com/developers/gitignore/api/linux,windows,macos,dotenv

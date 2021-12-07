@@ -1,6 +1,9 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/go
-# Edit at https://www.toptal.com/developers/gitignore?templates=go
+# Created by https://www.toptal.com/developers/gitignore/api/go, dotenv
+# Edit at https://www.toptal.com/developers/gitignore?templates=go, dotenv
+
+### dotenv ###
+.env
 
 ### Go ###
 # Binaries for programs and plugins
