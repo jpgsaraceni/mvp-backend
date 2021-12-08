@@ -30,7 +30,7 @@ Replace everything in braces with your own database information.
 
 If you've followed all the steps until here, we are almost ready to run the API.
 
-The last step is running the following command:
+The last step is running the following command, in the `store_api` directory:
 
 ```
 $ pip install -r requirements.txt
@@ -38,7 +38,7 @@ $ pip install -r requirements.txt
 
 It will install all the python packages we need to run the API.
 
-The command above suggest you're inside the `store_api` directory. You may need to update the `requirements.txt` path according to your location in the repository.
+You may need to update the `requirements.txt` path according to your location in the repository.
 
 Now, inside the `store_api` directory, run the following command:
 
@@ -46,7 +46,7 @@ Now, inside the `store_api` directory, run the following command:
 python3 -m uvicorn main:app --reload --port 5000 
 ```
 
-The output will be something like that:
+The output will be something like this:
 
 ```
   Will watch for changes in these directories: ['{yourAbsolutePath}/mvp-backend/store_api']
@@ -59,4 +59,4 @@ INFO:     Application startup complete.
 
 Then you can just open the link shown in the first INFO line in your browser.
 
-If you went to `/docs`, you will find all the API documentation, its endpoints, the parameters the endpoints receive, the responses and even try them out (will modify your database).
+If you go to `/docs`, you will find all the API documentation, its endpoints, the parameters the endpoints receive, the responses and even try them out (will modify your database).
