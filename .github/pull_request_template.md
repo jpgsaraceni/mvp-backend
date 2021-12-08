@@ -24,9 +24,6 @@
 #### Docs:
 - [ ] My changes do not require changing README.md
 - [ ] My changes require changing the README.md and I made the necessary changes.
-<!-- ==========================================
->| link to the release notes > https://docs.google.com/document/d/1oBBoIU7ObAt2uK8bJdS_wpg4lgu4r_h9ZMyiCcoMnVk/edit?usp=sharing
-========================================== -->
 <!-- - [ ] My changes don't require changing the release notes
 - [ ] My changes require changes to the release notes and I made the necessary changes -->
 
