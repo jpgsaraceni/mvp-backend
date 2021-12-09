@@ -7,11 +7,9 @@ from sqlalchemy import (
     DateTime,
     Float,
     Integer,
-    MetaData,
     String,
     Table,
-    Text,
-    create_engine
+    Text
 )
 from sqlalchemy.sql import func
 
