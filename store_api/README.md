@@ -22,11 +22,12 @@ $ git clone https://github.com/jpgsaraceni/mvp-backend
 
 Now you will need to create a `.env` file in the `store_api` directory containing the following variables:
 ```
-# database url connection string
-DATABASE_URL=postgresql://{username}:{password}@{host}:{port}/{database}
+DB_USER=yourDatabaseUser
+DB_PASS=yourDatabasePassword
+DB_HOST=yourDatabaseHost
+DB_PORT=yourDatabasePort
+DB_NAME=yourDatabaseName
 ```
-
-Replace everything in braces with your own database information.
 
 If you've followed all the steps until here, we are almost ready to run the API.
 
