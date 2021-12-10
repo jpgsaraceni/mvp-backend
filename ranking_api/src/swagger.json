@@ -1,0 +1,8 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Ranking API",
+        "description": "Ranking API for the system",
+        "version": "1.0.0"
+    }
+}
