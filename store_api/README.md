@@ -5,7 +5,7 @@ You can create, read, update and delete products using it.
 
 ## Testing locally
 ### Requirements:
-- Python 3.8 or later (**3.10 recommended**)
+- Python 3.8 or later (**3.8.9 recommended**)
 - pip 21.3.1
 - Postgres 13 or later (**14.1 recommended**)
 
