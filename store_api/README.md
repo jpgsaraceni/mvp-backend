@@ -34,7 +34,7 @@ If you've followed all the steps until here, we are almost ready to run the API.
 The last step is running the following command, in the `store_api/src` directory:
 
 ```
-$ pip install -r requirements.txt
+$ python3 -m pip install -r requirements.txt
 ```
 
 It will install all the python packages we need to run the API.
