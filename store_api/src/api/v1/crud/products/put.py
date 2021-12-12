@@ -1,4 +1,4 @@
-from fastapi.exceptions import HTTPException
+from fastapi import HTTPException
 from sqlalchemy.sql import func
 from database.db import database, products
 from models.v1.products import ProductSchema
