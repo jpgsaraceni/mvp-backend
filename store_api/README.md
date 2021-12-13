@@ -41,7 +41,7 @@ It will install all the python packages we need to run the API.
 
 You may need to update the `requirements.txt` path according to your location in the repository.
 
-Now, inside the `store_api/app` directory, run the following command:
+Now, inside the `store_api` directory, run the following command:
 
 ```
 $ python3 -m uvicorn main:app --reload --port 5000 
