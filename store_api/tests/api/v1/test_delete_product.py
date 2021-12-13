@@ -1,3 +1,5 @@
+import pytest
+
 def test_delete_product_by_id(test_app, monkeypatch):
     ''' Test the correct deletion of a product by its id '''
     test_response_payload = {
@@ -25,3 +27,24 @@ def test_delete_product_by_id(test_app, monkeypatch):
 
     assert response.status_code == 200
     assert response.json() == test_response_payload
+
+@pytest.mark.parametrize(
+    'product_id, status_code',
+    [
+        [-3, 400],
+        [999, 404],
+        ['a', 422]
+    ]
+)
+
+def test_delete_product_by_invalid_id(test_app, monkeypatch, product_id, status_code):
+    ''' Test the deletion of a product by invalid id '''
+
+    async def mock_get(product_id): #pylint: disable=unused-argument
+        return None
+
+    monkeypatch.setattr('app.api.v1.services.products.get.get', mock_get)
+
+    response = test_app.delete(f'/v1/products/{product_id}')
+
+    assert response.status_code == status_code
