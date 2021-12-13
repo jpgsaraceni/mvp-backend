@@ -9,7 +9,7 @@ router = APIRouter()
 async def delete_product(product_id: int):
     ''' Delete existing product from the database '''
     if product_id < 1:
-        raise HTTPException(status_code=404, detail="Product ID must be greater than 0")
+        raise HTTPException(status_code=400, detail="Product ID must be greater than 0")
 
     product = await get_service.get(product_id)
 
