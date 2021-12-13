@@ -48,7 +48,7 @@ def test_create_new_product(monkeypatch, test_app):
 
 def test_create_new_product_with_invalid_payload(test_app, monkeypatch, payload, status_code): #pylint: disable=unused-argument
     ''' Test creating new product with invalid payload '''
-    
+
     response = test_app.post('/v1/products', data=json.dumps(payload))
 
     assert response.status_code == status_code
