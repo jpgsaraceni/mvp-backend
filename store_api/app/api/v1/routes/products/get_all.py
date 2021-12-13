@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter
 from app.models.v1.products import ProductSchemaID
-import app.api.v1.crud.products.get_all as service
+import app.api.v1.services.products.get_all as service
 
 router = APIRouter()
 

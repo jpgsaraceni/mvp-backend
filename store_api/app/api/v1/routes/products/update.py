@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from app.models.v1.products import ProductSchema
 from app.models.v1.response import ResponseSchema
-import app.api.v1.crud.products.get as get_service
-import app.api.v1.crud.products.put as put_service
+import app.api.v1.services.products.get as get_service
+import app.api.v1.services.products.put as put_service
 
 router = APIRouter()
 
