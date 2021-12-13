@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from database.db import database
+from app.database.db import database
 
 async def get(product_id: int):
     ''' Get existent product by id '''

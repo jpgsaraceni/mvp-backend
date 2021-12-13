@@ -1,7 +1,7 @@
 from fastapi import APIRouter
-from models.v1.products import ProductSchema
-from models.v1.response import ResponseSchema
-from api.v1.crud.products.post import post
+from app.models.v1.products import ProductSchema
+from app.models.v1.response import ResponseSchema
+from app.api.v1.crud.products.post import post
 
 router = APIRouter()
 

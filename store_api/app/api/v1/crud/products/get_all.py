@@ -1,4 +1,4 @@
-from database.db import database
+from app.database.db import database
 from fastapi import HTTPException
 
 async def get_all():

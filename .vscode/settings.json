@@ -4,6 +4,6 @@
     "python.linting.pylintArgs": [
         "--disable=C0114", 
         "--init-hook",
-        "import sys; sys.path.append('store_api/src')"
+        "import sys; sys.path.append('store_api/')"
     ],
 }
