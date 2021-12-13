@@ -44,7 +44,7 @@ You may need to update the `requirements.txt` path according to your location in
 Now, inside the `store_api` directory, run the following command:
 
 ```
-$ python3 -m uvicorn main:app --reload --port 5000 
+$ python3 -m uvicorn app.main:app --reload --port 5000 
 ```
 
 The output will be something like this:
