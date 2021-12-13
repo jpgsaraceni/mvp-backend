@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from app.models.v1.products import ProductSchemaID
-from app.api.v1.crud.products.get import get
+import app.api.v1.crud.products.get as service
 
 
 router = APIRouter()
@@ -11,7 +11,7 @@ async def get_product_by_id(product_id: int):
     if product_id < 1:
         raise HTTPException(status_code=400, detail="Product ID must be greater than 0")
 
-    product = await get(product_id)
+    product = await service.get(product_id)
 
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")

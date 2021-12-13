@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from app.models.v1.products import ProductSchema
 from app.models.v1.response import ResponseSchema
-from app.api.v1.crud.products.get import get
-from app.api.v1.crud.products.put import put
+import app.api.v1.crud.products.get as get_service
+import app.api.v1.crud.products.put as put_service
 
 router = APIRouter()
 
@@ -12,12 +12,12 @@ async def update_product(product_id: int, payload: ProductSchema):
     if product_id < 1:
         raise HTTPException(status_code=400, detail="Product ID must be greater than 0")
 
-    product = await get(product_id)
+    product = await get_service.get(product_id)
 
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
 
-    product = await put(product_id, payload)
+    product = await put_service.put(product_id, payload)
 
     response_object = {
         'message': "Product updated successfully",
