@@ -42,7 +42,7 @@ app.get('/products', async (req: Request, res: Response) => {
 });
 
 app.get('/product', async (req: Request, res: Response) => {
-  const productid = req.body.product_id;
+  const productid = req.query.product_id;
   if (!productid) {
     res.status(400).send({ error: 'Please provide an ID' });
   } else {
@@ -74,12 +74,14 @@ app.post('/purchase/:product_id', async (req: Request, res: Response) => {
 
       axios
         .get(`${process.env.CURRENT_API}/product?product_id=${productid}`)
-        .then(() => {
+        .then((response) => {
           axios.post(`${process.env.PAYMENT_API}/authorize`, null, {
             headers: {
               Authorization: 'Bearer ' + onlyjwt,
             },
-          });
+          }).then(() => {
+              res.status(200).send(response.data);
+          })
         })
         .catch((err) => {
           res.status(400).send({ error: 'This Item does not exists' });
