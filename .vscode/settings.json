@@ -1,0 +1,9 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintArgs": [
+        "--disable=C0114", 
+        "--init-hook",
+        "import sys; sys.path.append('store_api/')"
+    ],
+}
