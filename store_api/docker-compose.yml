@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  store_database:
+    image: postgres:14.1-alpine
+    environment:
+      - POSTGRES_PASSWORD=$DB_PASS
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_DB=$DB_NAME
+      - DATABASE_HOST=$DB_HOST
+    container_name: store_database
+    ports:
+      - '5432:5432'
+    volumes:
+      - store_database:/var/lib/postgresql/data
+    networks:
+      - store
+
+  store_api:
+      container_name: store_api
+      build: ./
+      restart: always
+      command: python3 -m uvicorn app.main:app --reload --port 4001 --host 0.0.0.0
+      volumes:
+        - store_api:/usr/src/app/
+      ports:
+        - 4000:4001
+      depends_on:
+        - store_database
+      networks:
+        - store
+
+volumes:
+  store_api:
+  store_database:
+
+networks:
+  store:
+    driver: bridge
