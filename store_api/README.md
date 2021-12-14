@@ -31,7 +31,7 @@ DB_NAME=yourDatabaseName
 
 If you've followed all the steps until here, we are almost ready to run the API.
 
-The last step is running the following command, in the `store_api/src` directory:
+The last step is running the following command, in the `store_api` directory:
 
 ```
 $ python3 -m pip install -r requirements.txt
@@ -41,10 +41,10 @@ It will install all the python packages we need to run the API.
 
 You may need to update the `requirements.txt` path according to your location in the repository.
 
-Now, inside the `store_api/src` directory, run the following command:
+Now, inside the `store_api` directory, run the following command:
 
 ```
-$ python3 -m uvicorn main:app --reload --port 5000 
+$ python3 -m uvicorn app.main:app --reload --port 5000 
 ```
 
 The output will be something like this:
