@@ -27,6 +27,7 @@ DB_PASS=yourDatabasePassword
 DB_HOST=yourDatabaseHost
 DB_PORT=yourDatabasePort
 DB_NAME=yourDatabaseName
+DB_SCHEMA=yourDatabaseSchema
 ```
 
 If you've followed all the steps until here, we are almost ready to run the API.
