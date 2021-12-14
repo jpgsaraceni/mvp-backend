@@ -1,0 +1,41 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    restart: always
+    command: postgres -c listen_addresses='*'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U prisma -d ranking"]
+      interval: 10s
+      timeout: 7s
+      retries: 5
+    ports:
+      - 5432:5432
+    environment:
+        - POSTGRES_USER=prisma
+        - POSTGRES_PASSWORD=123456
+        - POSTGRES_DB=ranking
+    volumes:
+      - pgdata:/data/postgres
+      
+  ranking-api:
+    container_name: ranking-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    links:
+      - postgres
+    environment:
+        - DATABASE_URL=postgresql://prisma:123456@postgres:5432/ranking?schema=public
+    volumes:
+        - .:/usr/app
+
+volumes:
+  pgdata:
+    driver: local
