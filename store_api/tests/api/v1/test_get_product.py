@@ -10,7 +10,7 @@ def test_get_product_by_id(test_app, monkeypatch):
         'image': None
     }
 
-    async def mock_get(product_id): #pylint: disable=unused-argument
+    async def mock_get(_):
         return test_response_payload
 
     monkeypatch.setattr('app.api.v1.services.products.get.get', mock_get)
@@ -32,7 +32,7 @@ def test_get_product_by_id(test_app, monkeypatch):
 def test_get_product_by_invalid_id(test_app, monkeypatch, product_id, status_code):
     ''' Test fetching a product by invalid id '''
 
-    async def mock_get(product_id): #pylint: disable=unused-argument
+    async def mock_get(_):
         return None
 
     monkeypatch.setattr('app.api.v1.services.products.get.get', mock_get)

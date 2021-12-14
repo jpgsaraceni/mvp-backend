@@ -48,7 +48,7 @@ def test_update_product_by_id(test_app, monkeypatch):
 def test_update_product_with_invalid_id(test_app, monkeypatch, product_id, payload, status_code): #pylint: disable=unused-argument
     ''' Test update product with invalid id '''
 
-    async def mock_get(product_id): #pylint: disable=unused-argument
+    async def mock_get(_):
         return None
 
     monkeypatch.setattr('app.api.v1.services.products.get.get', mock_get)

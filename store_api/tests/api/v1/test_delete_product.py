@@ -40,7 +40,7 @@ def test_delete_product_by_id(test_app, monkeypatch):
 def test_delete_product_by_invalid_id(test_app, monkeypatch, product_id, status_code):
     ''' Test the deletion of a product by invalid id '''
 
-    async def mock_get(product_id): #pylint: disable=unused-argument
+    async def mock_get(_):
         return None
 
     monkeypatch.setattr('app.api.v1.services.products.get.get', mock_get)
