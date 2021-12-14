@@ -1,5 +1,5 @@
-from database.db import database, products
-from models.v1.products import ProductSchema
+from app.database.db import database, products
+from app.models.v1.products import ProductSchema
 from fastapi import HTTPException
 
 async def post(product: ProductSchema):

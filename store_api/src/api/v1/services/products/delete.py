@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from sqlalchemy.sql import func
-from database.db import database, products
+from app.database.db import database, products
 
 async def delete(product_id: int):
     ''' Delete existing product in the database '''
