@@ -1,0 +1,63 @@
+{
+    "compilerOptions": {
+      "target": "es2017",
+      "module": "commonjs",
+      "baseUrl": "./src",
+      "strict": true,
+      "skipLibCheck": true,
+      "outDir": "./dist",
+      "resolveJsonModule": true,
+      "paths": {
+        "@app/*": [
+          "*"
+        ],
+        "@config/*": [
+          "config/*"
+        ],
+        "@controller/*": [
+          "controllers/*"
+        ],
+        "@helpers/*": [
+          "helpers/*"
+        ],
+        "@logs/*": [
+          "logs/*"
+        ],
+        "@middlewares/*": [
+          "middlewares/*"
+        ],
+        "@model/*": [
+          "model/*"
+        ],
+        "@routes/*": [
+          "routes/*"
+        ],
+        "@services/*": [
+          "services/*"
+        ],
+        "@validations/*": [
+          "validations/*"
+        ],
+        "@sql/*": [
+          "sql/*"
+        ]
+      },
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "plugins": [
+        {
+          "transform": "typescript-transform-paths"
+        }
+      ],
+      "typeRoots": [
+        "./src/@types",
+        "node_modules/@types"
+      ],
+    },
+    "exclude": [
+        "node_modules",
+        "jest.config.ts",
+        "src/__mock__",
+        "src/__tests__"
+    ]
+  }
