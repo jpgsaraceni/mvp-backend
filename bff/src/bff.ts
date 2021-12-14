@@ -115,7 +115,7 @@ app.post('/register', async (req: Request, res: Response) => {
     });
 });
 
-axios.post('/login', async (req: Request, res: Response) => {
+app.post('/login', async (req: Request, res: Response) => {
     const email = req.body.email;
     const password = req.body.password;
 
