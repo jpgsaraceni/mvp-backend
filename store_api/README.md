@@ -31,7 +31,7 @@ DB_NAME=yourDatabaseName
 
 If you've followed all the steps until here, we are almost ready to run the API.
 
-The last step is running the following command, in the `store_api/app` directory:
+The last step is running the following command, in the `store_api` directory:
 
 ```
 $ python3 -m pip install -r requirements.txt
