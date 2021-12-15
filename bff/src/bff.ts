@@ -23,16 +23,20 @@ app.post('/ranking', async (req: Request, res: Response) => {
       score: req.body.score,
     })
     .then((response) => {
-      res.status(201).send({success: 'Ranking added'});
+      res.status(201).send({ success: 'Ranking added' });
     })
     .catch((err) => {
-      res.status(500).send({ error: err });
+      if (err.response.status == 409) {
+        res.status(409).send(err.response.data);
+      } else {
+        res.status(500).send({ error: err });
+      }
     });
 });
 
 app.get('/products', async (req: Request, res: Response) => {
   axios
-    .get(`${process.env.STORE_API}/products`)
+    .get(`${process.env.STORE_API}/v1/products`)
     .then((response) => {
       res.status(200).send(response.data);
     })
@@ -47,13 +51,15 @@ app.get('/product', async (req: Request, res: Response) => {
     res.status(400).send({ error: 'Please provide an ID' });
   } else {
     axios
-      .get(`${process.env.STORE_API}/product?product_id=${productid}`)
+      .get(`${process.env.STORE_API}/v1/products/${productid}`)
       .then((response) => {
         res.status(200).send(response.data);
       })
       .catch((err) => {
         if (err.response.status == 400) {
           res.status(400).send(err);
+        } else if (err.response.status == 404) {
+          res.status(404).send({ error: 'Product not found' });
         } else {
           res.status(500).send({ error: 'Cannot retrieve this product, check products API logs for details' });
         }
@@ -63,28 +69,36 @@ app.get('/product', async (req: Request, res: Response) => {
 
 app.post('/purchase/:product_id', async (req: Request, res: Response) => {
   const productid = req.params.product_id;
-  const [, onlyjwt]: any = req.headers.authorization?.split(' ');
-  const secret = process.env.SECRET;
 
-  if (!productid) {
+  if (!req.headers.authorization) {
+    res.status(400).send({ error: 'Token not found' });
+  } else if (!productid) {
     res.status(400).send({ error: 'Please provide a product ID' });
   } else {
+    const [, onlyjwt]: any = req.headers.authorization?.split(' ');
+    const secret = process.env.SECRET;
     try {
       jwt.verify(onlyjwt, secret as string);
 
       axios
-        .get(`${process.env.CURRENT_API}/product?product_id=${productid}`)
+        .get(`${process.env.CURRENT_API}/products/${productid}`)
         .then((response) => {
-          axios.post(`${process.env.PAYMENT_API}/authorize`, null, {
-            headers: {
-              Authorization: 'Bearer ' + onlyjwt,
-            },
-          }).then(() => {
+          axios
+            .post(`${process.env.PAYMENT_API}/authorize`, null, {
+              headers: {
+                Authorization: 'Bearer ' + onlyjwt,
+              },
+            })
+            .then(() => {
               res.status(200).send(response.data);
-          })
+            });
         })
         .catch((err) => {
-          res.status(400).send({ error: 'This Item does not exists' });
+          if(err.response.status == 404) {
+            res.status(404).send({error: "Product not found"});
+          } else {
+            res.status(500).send({ error: 'Internal error' });
+          }
         });
     } catch (err) {
       res.status(401).send({ error: 'Invalid Token' });
@@ -116,20 +130,23 @@ app.post('/register', async (req: Request, res: Response) => {
 });
 
 app.post('/login', async (req: Request, res: Response) => {
-    const email = req.body.email;
-    const password = req.body.password;
+  const email = req.body.email;
+  const password = req.body.password;
 
-    axios.post(`${process.env.SESSION_API}/login`, {
-        email: email,
-        password: password
-    }).then((response) => {
-        res.status(200).send(response.data);
-    }).catch((err) => {
-        if(err.response.status == 400) {
-            res.status(400).send({error: 'Invalid email or password'});
-        } else {
-            res.status(500).send({error: 'Internal error'});
-        }
+  axios
+    .post(`${process.env.SESSION_API}/login`, {
+      email: email,
+      password: password,
     })
-})
+    .then((response) => {
+      res.status(200).send(response.data);
+    })
+    .catch((err) => {
+      if (err.response.status == 400) {
+        res.status(400).send({ error: 'Invalid email or password' });
+      } else {
+        res.status(500).send({ error: 'Internal error' });
+      }
+    });
+});
 export default app;
