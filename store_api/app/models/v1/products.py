@@ -23,7 +23,7 @@ class ProductSchema (BaseModel):
             raise ValueError(
                "Product description must be greater than 2 and smaller than 141 characters")
 
-        return value.title()
+        return value.capitalize()
 
     @validator('price')
     def price_must_be_positive(cls, value): #pylint: disable=no-self-argument

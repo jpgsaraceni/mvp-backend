@@ -7,7 +7,7 @@ async def get(product_id: int):
         products
         .select()
         .where(
-            products.c.deleted_at is not None,
+            products.c.deleted_at.is_(None),
             products.c.id == product_id
         )
     )
