@@ -6,7 +6,7 @@ async def get_all():
     query = (
         products
         .select()
-        .where(products.c.deleted_at is not None)
+        .where(products.c.deleted_at.is_(None))
     )
 
     try:
