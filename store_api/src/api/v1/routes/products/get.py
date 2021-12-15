@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from models.v1.products import ProductSchemaID
-from api.v1.crud.products.get import get
+from app.models.v1.products import ProductSchemaID
+from app.api.v1.services.products.get import get
 
 
 router = APIRouter()

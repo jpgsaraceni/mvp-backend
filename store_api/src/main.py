@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api.v1.routes.products import main as products_routes
+from app.api.v1.routes.products import main as products_routes
 
 app = FastAPI()
 

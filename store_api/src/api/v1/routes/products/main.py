@@ -1,9 +1,9 @@
 from fastapi import APIRouter
-from api.v1.routes.products import create as create_product
-from api.v1.routes.products import update as update_product
-from api.v1.routes.products import delete as delete_product
-from api.v1.routes.products import get as get_product
-from api.v1.routes.products import get_all as get_all_products
+from app.api.v1.routes.products import create as create_product
+from app.api.v1.routes.products import update as update_product
+from app.api.v1.routes.products import delete as delete_product
+from app.api.v1.routes.products import get as get_product
+from app.api.v1.routes.products import get_all as get_all_products
 
 router = APIRouter(
     prefix='/v1',

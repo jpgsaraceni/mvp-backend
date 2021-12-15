@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from databases import Database
+from sqlalchemy.schema import CreateSchema
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy import (
     Column,
@@ -20,11 +21,16 @@ DB_PASS = os.getenv('DB_PASS')
 DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
 DB_NAME = os.getenv('DB_NAME')
+DB_SCHEMA = os.getenv('DB_SCHEMA')
 
 DATABASE_URL = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 
 engine = create_engine(DATABASE_URL) # used for communicating with the database
-metadata = MetaData() # used for creating the database schema
+
+if not engine.dialect.has_schema(engine, DB_SCHEMA):
+    engine.execute(CreateSchema(DB_SCHEMA))
+
+metadata = MetaData(schema=DB_SCHEMA) # used for creating the database schema
 
 # define table products
 products = Table (

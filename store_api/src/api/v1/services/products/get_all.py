@@ -5,17 +5,23 @@ async def get_all():
     ''' Get all existent products from the database '''
     query = (
         products
-        .select()
+        .query()
+        .with_entities(
+            products.c.id,
+            products.c.name,
+            products.c.description,
+            products.c.price,
+        )
         .where(products.c.deleted_at is not None)
     )
 
     try:
         await database.connect()
-        found_product = await database.fetch_all(query = query)
+        found_products = await database.fetch_all(query = query)
 
         await database.disconnect()
 
-        return found_product
+        return found_products
 
     except AssertionError as err:
         raise HTTPException(

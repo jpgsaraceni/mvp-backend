@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from sqlalchemy.sql import func
-from database.db import database, products
-from models.v1.products import ProductSchema
+from app.database.db import database, products
+from app.models.v1.products import ProductSchema
 
 async def put(product_id: int, product: ProductSchema):
     ''' Update existing product in the database '''
