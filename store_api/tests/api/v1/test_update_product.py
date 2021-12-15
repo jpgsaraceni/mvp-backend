@@ -26,7 +26,7 @@ def test_update_product_by_id(test_app, monkeypatch):
 
     monkeypatch.setattr('app.api.v1.services.products.get.get', mock_get)
 
-    async def mock_put(product_id, payload): #pylint: disable=unused-argument
+    async def mock_put(product_id, _):
         return product_id
 
     monkeypatch.setattr('app.api.v1.services.products.put.put', mock_put)
