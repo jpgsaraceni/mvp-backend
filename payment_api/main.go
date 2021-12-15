@@ -32,6 +32,6 @@ func main() {
 	}
 
 	http.HandleFunc("/authorize", authorize)
-
+	log.Printf("Server started on port %s", os.Getenv("SERVER_PORT"))
 	log.Fatal(http.ListenAndServe(os.Getenv("SERVER_PORT"), nil))
 }
