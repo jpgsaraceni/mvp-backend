@@ -36,7 +36,7 @@ app.post('/ranking', async (req: Request, res: Response) => {
 
 app.get('/products', async (req: Request, res: Response) => {
   axios
-    .get(`${process.env.STORE_API}/products`)
+    .get(`${process.env.STORE_API}/v1/products`)
     .then((response) => {
       res.status(200).send(response.data);
     })
@@ -51,13 +51,15 @@ app.get('/product', async (req: Request, res: Response) => {
     res.status(400).send({ error: 'Please provide an ID' });
   } else {
     axios
-      .get(`${process.env.STORE_API}/product?product_id=${productid}`)
+      .get(`${process.env.STORE_API}/v1/products/${productid}`)
       .then((response) => {
         res.status(200).send(response.data);
       })
       .catch((err) => {
         if (err.response.status == 400) {
           res.status(400).send(err);
+        } else if (err.response.status == 404) {
+          res.status(404).send({ error: 'Product not found' });
         } else {
           res.status(500).send({ error: 'Cannot retrieve this product, check products API logs for details' });
         }
@@ -79,7 +81,7 @@ app.post('/purchase/:product_id', async (req: Request, res: Response) => {
       jwt.verify(onlyjwt, secret as string);
 
       axios
-        .get(`${process.env.CURRENT_API}/product?product_id=${productid}`)
+        .get(`${process.env.CURRENT_API}/products/${productid}`)
         .then((response) => {
           axios
             .post(`${process.env.PAYMENT_API}/authorize`, null, {
@@ -92,7 +94,11 @@ app.post('/purchase/:product_id', async (req: Request, res: Response) => {
             });
         })
         .catch((err) => {
-          res.status(400).send({ error: 'This Item does not exists' });
+          if(err.response.status == 404) {
+            res.status(404).send({error: "Product not found"});
+          } else {
+            res.status(500).send({ error: 'Internal error' });
+          }
         });
     } catch (err) {
       res.status(401).send({ error: 'Invalid Token' });
