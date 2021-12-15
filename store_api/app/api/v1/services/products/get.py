@@ -1,18 +1,20 @@
 from fastapi import HTTPException
-from app.database.db import database
+from app.database.db import database, products
 
 async def get(product_id: int):
     ''' Get existent product by id '''
-    query = '''SELECT id,
-        name,
-        description,
-        price,
-        image
-        FROM products WHERE deleted_at IS NULL AND id = :id'''
+    query = (
+        products
+        .select()
+        .where(
+            products.c.deleted_at is not None,
+            products.c.id == product_id
+        )
+    )
 
     try:
         await database.connect()
-        product = await database.fetch_one(query = query, values = {'id': product_id})
+        product = await database.fetch_one(query = query)
 
         await database.disconnect()
 

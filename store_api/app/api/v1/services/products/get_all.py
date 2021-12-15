@@ -1,17 +1,21 @@
-from app.database.db import database
+from app.database.db import database, products
 from fastapi import HTTPException
 
 async def get_all():
     ''' Get all existent products from the database '''
-    query = "SELECT id, name, description, price, image FROM products WHERE deleted_at IS NULL"
+    query = (
+        products
+        .select()
+        .where(products.c.deleted_at is not None)
+    )
 
     try:
         await database.connect()
-        products = await database.fetch_all(query = query)
+        found_product = await database.fetch_all(query = query)
 
         await database.disconnect()
 
-        return products
+        return found_product
 
     except AssertionError as err:
         raise HTTPException(
