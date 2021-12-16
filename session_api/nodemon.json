@@ -1,0 +1,5 @@
+{
+    "ext": "ts, json",
+    "ignore": ["*.test.ts", "*.spec.ts", "*.log", "dist/*.json"],
+    "exec": "npx ttsc && node dist/server.js"
+}
