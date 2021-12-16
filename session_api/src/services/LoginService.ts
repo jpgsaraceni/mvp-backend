@@ -35,10 +35,7 @@ export class LoginService {
                 try {
                     jwt.verify(token, process.env.SECRET as string);
                     const userObject = {
-                        id: result.id,
-                        name: result.name,
-                        email: result.email,
-                        token: token,
+                        token: token
                     };
                     return userObject;
                 } catch (err) {
