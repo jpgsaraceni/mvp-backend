@@ -3,10 +3,6 @@
 
 API for handle all the requests
 
-
-
-
-
 ## API Reference
 
 #### Get top 10 from ranking
@@ -14,10 +10,11 @@ API for handle all the requests
 ```http
   GET /ranking
 ```
+
 ### Expected response
+
 * **Content:** `{ position : 1, name : "cool name", score: 100 }`
 &nbsp;
-
 
 #### Insert rank
 
@@ -31,6 +28,7 @@ API for handle all the requests
 | `score`     | `number` | **Required**. Player's score |
 
 ### Expected response
+
 * **Content:** `{ success: "Ranking added" }`
 &nbsp;
 
@@ -39,11 +37,14 @@ API for handle all the requests
 ```http
   GET /products
 ```
+
 * **Content:**
+
 ```
 { id : 1, name : "cool product1", description: "cool description1", price: 100, image: cool image  }
 { id : 2, name : "cool product2", description: "cool description2", price: 220, image: cool image  }
 ```
+
 &nbsp;
 
 #### Get one product
@@ -57,9 +58,9 @@ API for handle all the requests
 | `id`      | `number` | **Required**. Product's ID |
 
 ### Expected response
+
 * **Content:** `{ id : 1, name : "cool product1", description: "cool description1", price: 100, image: cool image  }`
 &nbsp;
-
 
 #### Purchase one product
 
@@ -72,6 +73,7 @@ API for handle all the requests
 | `product_id`      | `number` | **Required**. Product's ID |
 
 ### Expected response
+
 * **Content:** `{ "payment": "confirmed" }`
 &nbsp;
 
@@ -88,9 +90,9 @@ API for handle all the requests
 | `password`   | `string` | **Required**. Person's password |
 
 ### Expected response
+
 * **Content:** `{ "success": "Account created" }`
 &nbsp;
-
 
 #### Return user data
 
@@ -104,6 +106,74 @@ API for handle all the requests
 | `password`   | `string` | **Required**. Person's password |
 
 ### Expected response
+
 * **Content:** `{ "id": 1, "name": cool name, "token": cool jwt token }`
 &nbsp;
 
+## Run this api Locally
+
+**IMPORTANT: TO RUN THIS PROJECT YOU NEED TO CONFIGURE AND RUN ALL OTHERS API**
+
+Clone the project
+
+```bash
+  git clone https://github.com/jpgsaraceni/mvp-backend.git
+```
+
+Go to the session api directory
+
+```bash
+  cd mvp-backend/bff
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+OR
+
+```bash
+  yarn
+```
+
+Start the DEV server
+
+```bash
+  npm run dev
+```
+
+OR
+
+```bash
+  yarn
+```
+
+&nbsp;
+
+**If you wanna build to production**
+
+To Build for production
+
+```bash
+  npm run build
+```
+
+OR
+
+```bash
+  yarn build
+```
+
+To run optimized build
+
+```bash
+  npm run start
+```
+
+OR
+
+```bash
+  yarn start
+```

@@ -122,7 +122,7 @@ app.post('/register', async (req: Request, res: Response) => {
     })
     .catch((err) => {
       if (err.response.status == 400) {
-        res.status(400).send({ error: 'Email already exists' });
+        res.status(401).send({ error: 'Email already exists' });
       } else {
         res.status(500).send(err);
       }
@@ -143,7 +143,7 @@ app.post('/login', async (req: Request, res: Response) => {
     })
     .catch((err) => {
       if (err.response.status == 400) {
-        res.status(400).send({ error: 'Invalid email or password' });
+        res.status(401).send({ error: 'Invalid email/password or token });
       } else {
         res.status(500).send({ error: 'Internal error' });
       }
