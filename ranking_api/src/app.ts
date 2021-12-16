@@ -26,6 +26,7 @@ const dateoptions: ICommon = {
 
 if (!fs.existsSync(path.join(__dirname, "logs/Requests.log"))) {
     fs.mkdirSync('dist/logs', { recursive: true });
+    fs.mkdirSync('src/logs', { recursive: true });
 }
 
 const accessLogStream = fs.createWriteStream(
