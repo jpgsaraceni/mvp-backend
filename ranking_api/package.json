@@ -12,8 +12,7 @@
     "build:docker": "npx ttsc && npx prisma migrate dev --name init && npm run start:prod:docker:watch",
     "start": "node dist/server.js",
     "start:prod:docker": "node dist/server.js",
-    "start:prod:docker:watch": "nodemon -L",
-    "test": "npx jest"
+    "start:prod:docker:watch": "nodemon -L"
   },
   "dependencies": {
     "@prisma/client": "^3.6.0",

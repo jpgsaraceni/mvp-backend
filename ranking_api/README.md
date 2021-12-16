@@ -3,9 +3,6 @@
 
 An API for proccess the ranking system
 
-
-
-
 ## API Reference
 
 #### Add a new ranking for a player score
@@ -20,6 +17,7 @@ An API for proccess the ranking system
 | `score`   | `int` | **Required**. Player's score |
 
 ### Expected response
+
 * **Content:** `{ position : 1, name : "cool player", score: 100 }`
 &nbsp;
 
@@ -32,12 +30,13 @@ An API for proccess the ranking system
 ### Expected response
 
 * **Content:**
+
 ```
 { position : 1, name : "cool player", score: 100 }
 { position : 2, name : "cool player2", score: 95 }
 ```
-&nbsp;
 
+&nbsp;
 
 ## Environment Variables
 
@@ -47,9 +46,7 @@ You can check an example inside **.env.example**
 
 `DATABASE_URL`
 
-
-
-## Run Locally
+## Run this api Locally
 
 Clone the project
 
@@ -57,10 +54,10 @@ Clone the project
   git clone https://github.com/jpgsaraceni/mvp-backend.git
 ```
 
-Go to the project directory
+Go to the session api directory
 
 ```bash
-  cd mvp-backend/ranking-api
+  cd mvp-backend/ranking_api
 ```
 
 Install dependencies
@@ -69,17 +66,58 @@ Install dependencies
   npm install
 ```
 
-**Configure your .env following the .env.example**
+OR
 
-After, build the DB Model and run migrations
+```bash
+  yarn
+```
+
+**IMPORTANT: Configure your .env following the .env.example BEFORE GOING TO THE NEXT STEP**
+
+After, Run Prisma migrations
 
 ```bash
   npx prisma migrate dev --name init
 ```
 
-Start the server
+**Important: after this reopen your visual studio code/IDE**
+
+Start the DEV server
+
+```bash
+  npm run dev
+```
+
+OR
+
+```bash
+  yarn
+```
+
+&nbsp;
+
+**If you wanna build to production**
+
+To Build for production
+
+```bash
+  npm run build
+```
+
+OR
+
+```bash
+  yarn build
+```
+
+To run optimized build
 
 ```bash
   npm run start
 ```
 
+OR
+
+```bash
+  yarn start
+```
