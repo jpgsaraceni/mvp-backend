@@ -8,7 +8,7 @@ Considering that children from ages 4 to 7 have a greater capacity of learning n
 
 ### Point System
 
-The child starts the level with a score of 100 points. for each correct move, 10 points are earned. For each wrong move, 10 points are lost.
+The child starts the level with a score of 100 points. For each correct move, 10 points are earned. For each wrong move, 10 points are lost.
 At the end of the level the child can register their score in a ranking, the top 10 are shown in the ranking list, in a classic arcade high score style (rank, name and score).
 The game also has a store, where the child's parents can buy them game benefits, among other things.
 
