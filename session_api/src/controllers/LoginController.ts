@@ -19,11 +19,11 @@ export class LoginController {
                 res.status(201).send(result);
             } catch (err: any) {
                 if (err == "invalidpass") {
-                    res.status(400).json({ error: "Invalid password" });
+                    res.status(401).json({ error: "Invalid password" });
                 } else if (err == "invalidjwt") {
-                    res.status(400).json({ error: "Invalid token" });
+                    res.status(401).json({ error: "Invalid token" });
                 } else if (err == "emailnotfound") {
-                    res.status(400).json({ error: "Email not found" });
+                    res.status(401).json({ error: "Email not found" });
                 } else {
                     handleError(err, "RegisterController");
                     res.status(500).json({
