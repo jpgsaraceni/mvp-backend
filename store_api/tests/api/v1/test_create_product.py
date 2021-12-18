@@ -42,7 +42,7 @@ def test_create_new_product(monkeypatch, test_app):
     ],
 )
 
-def test_create_new_product_with_invalid_payload(test_app, monkeypatch, payload, status_code): #pylint: disable=unused-argument
+def test_create_new_product_with_invalid_payload(test_app, payload, status_code):
     ''' Test creating new product with invalid payload '''
 
     response = test_app.post('/v1/products', data=json.dumps(payload))
@@ -58,7 +58,7 @@ def test_create_new_product_with_invalid_payload(test_app, monkeypatch, payload,
     ],
 )
 
-def test_create_new_product_with_invalid_name(test_app, monkeypatch, payload, status_code): #pylint: disable=unused-argument
+def test_create_new_product_with_invalid_name(test_app, payload, status_code):
     ''' Test creating new product with invalid name '''
 
     response = test_app.post('/v1/products', data=json.dumps(payload))
@@ -74,7 +74,7 @@ def test_create_new_product_with_invalid_name(test_app, monkeypatch, payload, st
     ],
 )
 
-def test_create_new_product_with_invalid_description(test_app, monkeypatch, payload, status_code): #pylint: disable=unused-argument
+def test_create_new_product_with_invalid_description(test_app, payload, status_code):
     ''' Test creating new product with invalid description '''
 
     response = test_app.post('/v1/products', data=json.dumps(payload))
@@ -90,7 +90,7 @@ def test_create_new_product_with_invalid_description(test_app, monkeypatch, payl
     ],
 )
 
-def test_create_new_product_with_invalid_price(test_app, monkeypatch, payload, status_code): #pylint: disable=unused-argument
+def test_create_new_product_with_invalid_price(test_app, payload, status_code):
     ''' Test creating new product with invalid price '''
 
     response = test_app.post('/v1/products', data=json.dumps(payload))
@@ -108,7 +108,7 @@ def test_create_new_product_with_invalid_price(test_app, monkeypatch, payload, s
     ],
 )
 
-def test_create_new_product_with_invalid_name_and_description(test_app, monkeypatch, payload, status_code): #pylint: disable=unused-argument
+def test_create_new_product_with_invalid_name_and_description(test_app, payload, status_code):
     ''' Test creating new product with invalid name and description '''
 
     response = test_app.post('/v1/products', data=json.dumps(payload))
@@ -126,7 +126,7 @@ def test_create_new_product_with_invalid_name_and_description(test_app, monkeypa
     ],
 )
 
-def test_create_new_product_with_invalid_name_and_price(test_app, monkeypatch, payload, status_code): #pylint: disable=unused-argument
+def test_create_new_product_with_invalid_name_and_price(test_app, payload, status_code):
     ''' Test creating new product with invalid name and price '''
 
     response = test_app.post('/v1/products', data=json.dumps(payload))
@@ -144,7 +144,7 @@ def test_create_new_product_with_invalid_name_and_price(test_app, monkeypatch, p
     ],
 )
 
-def test_create_new_product_with_invalid_description_and_price(test_app, monkeypatch, payload, status_code): #pylint: disable=unused-argument
+def test_create_new_product_with_invalid_description_and_price(test_app, payload, status_code):
     ''' Test creating new product with invalid description and price '''
 
     response = test_app.post('/v1/products', data=json.dumps(payload))

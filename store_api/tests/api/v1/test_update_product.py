@@ -45,7 +45,7 @@ def test_update_product_by_id(test_app, monkeypatch):
     ]
 )
 
-def test_update_product_with_invalid_id(test_app, monkeypatch, product_id, payload, status_code): #pylint: disable=unused-argument
+def test_update_product_with_invalid_id(test_app, monkeypatch, product_id, payload, status_code):
     ''' Test update product with invalid id '''
 
     async def mock_get(_):
@@ -72,7 +72,7 @@ def test_update_product_with_invalid_id(test_app, monkeypatch, product_id, paylo
     ],
 )
 
-def test_update_product_with_valid_id_but_invalid_payload(test_app, monkeypatch, product_id, payload, status_code): #pylint: disable=unused-argument
+def test_update_product_with_valid_id_but_invalid_payload(test_app, product_id, payload, status_code):
     ''' Test updating new product with invalid payload '''
 
     response = test_app.put(f'/v1/products/{product_id}', data=json.dumps(payload))
@@ -88,7 +88,7 @@ def test_update_product_with_valid_id_but_invalid_payload(test_app, monkeypatch,
     ],
 )
 
-def test_update_product_with_valid_id_but_invalid_name(test_app, monkeypatch, product_id, payload, status_code): #pylint: disable=unused-argument
+def test_update_product_with_valid_id_but_invalid_name(test_app, product_id, payload, status_code):
     ''' Test updating new product with invalid name '''
 
     response = test_app.put(f'/v1/products/{product_id}', data=json.dumps(payload))
@@ -104,7 +104,7 @@ def test_update_product_with_valid_id_but_invalid_name(test_app, monkeypatch, pr
     ],
 )
 
-def test_update_product_with_valid_id_but_invalid_description(test_app, monkeypatch, product_id, payload, status_code): #pylint: disable=unused-argument
+def test_update_product_with_valid_id_but_invalid_description(test_app, product_id, payload, status_code):
     ''' Test updating new product with invalid description '''
 
     response = test_app.put(f'/v1/products/{product_id}', data=json.dumps(payload))
@@ -120,7 +120,7 @@ def test_update_product_with_valid_id_but_invalid_description(test_app, monkeypa
     ],
 )
 
-def test_update_product_with_valid_id_but_invalid_price(test_app, monkeypatch, product_id, payload, status_code): #pylint: disable=unused-argument
+def test_update_product_with_valid_id_but_invalid_price(test_app, product_id, payload, status_code):
     ''' Test updating new product with invalid price '''
 
     response = test_app.put(f'/v1/products/{product_id}', data=json.dumps(payload))
@@ -138,7 +138,7 @@ def test_update_product_with_valid_id_but_invalid_price(test_app, monkeypatch, p
     ],
 )
 
-def test_update_product_with_valid_id_but_invalid_name_and_description(test_app, monkeypatch, product_id, payload, status_code): #pylint: disable=unused-argument
+def test_update_product_with_valid_id_but_invalid_name_and_description(test_app, product_id, payload, status_code):
     ''' Test updating new product with invalid name and description '''
 
     response = test_app.put(f'/v1/products/{product_id}', data=json.dumps(payload))
@@ -156,7 +156,7 @@ def test_update_product_with_valid_id_but_invalid_name_and_description(test_app,
     ],
 )
 
-def test_update_product_with_valid_id_but_invalid_name_and_price(test_app, monkeypatch, product_id, payload, status_code): #pylint: disable=unused-argument
+def test_update_product_with_valid_id_but_invalid_name_and_price(test_app, product_id, payload, status_code):
     ''' Test updating new product with invalid name and price '''
 
     response = test_app.put(f'/v1/products/{product_id}', data=json.dumps(payload))
@@ -174,7 +174,7 @@ def test_update_product_with_valid_id_but_invalid_name_and_price(test_app, monke
     ],
 )
 
-def test_update_product_with_valid_id_but_invalid_description_and_price(test_app, monkeypatch, product_id, payload, status_code): #pylint: disable=unused-argument
+def test_update_product_with_valid_id_but_invalid_description_and_price(test_app, product_id, payload, status_code):
     ''' Test updating new product with invalid description and price '''
 
     response = test_app.put(f'/v1/products/{product_id}', data=json.dumps(payload))
