@@ -12,7 +12,13 @@ async def get_all_sales(
     client: int = None,
     payment_method: int = None
 ):
-    ''' List all existent sales '''
+    ''' List all existent sales \n
+        The sales can be filter by: \n
+        category: Product category id \n
+        product: Product id \n
+        payment_method: Payment method id \n
+        client: Client id \n
+    '''
     sales = await service.get_all(
         category = category,
         product = product,
