@@ -8,7 +8,7 @@ async def post (sale: SalesSchema):
 
     end_date = datetime or None
 
-    if sale.valid_for != 0:
+    if sale.valid_for != 0 and sale.valid_for is not None:
         end_date = datetime.now() + timedelta(days = sale.valid_for)
     else:
         end_date = None
