@@ -43,7 +43,6 @@ categories = Table (
     Column('created_at', DateTime(timezone=True), default=func.now(), nullable=False),
     Column('inactivated_at', DateTime(timezone=True), nullable=True),
     Column('updated_at', DateTime(timezone=True), nullable=True),
-    Column('updated_at', DateTime(timezone=True), nullable=True),
     Column('deleted_at', DateTime(timezone=True), nullable=True)
 )
 
