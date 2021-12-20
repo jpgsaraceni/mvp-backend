@@ -26,6 +26,12 @@ async def get_all(
     )
 
     if category is not None:
+        if category < 1:
+            raise HTTPException(
+                status_code = 400,
+                detail = "The category filter must be a value greater than zero"
+            )
+
         query.append_whereclause(products.c.category_id == category)
 
     try:

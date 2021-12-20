@@ -28,15 +28,37 @@ async def get_all(
     )
 
     if product is not None:
+        if product < 1:
+            raise HTTPException(
+                status_code = 400,
+                detail = "The product filter must be a value greater than zero"
+            )
+
         query.append_whereclause(sales.c.product_id == product)
 
     if payment_method is not None:
+        if payment_method < 1:
+            raise HTTPException(
+                status_code = 400,
+                detail = "The payment method filter must be a value greater than zero"
+            )
         query.append_whereclause(sales.c.payment_method_id == payment_method)
 
     if client is not None:
+        if client < 1:
+            raise HTTPException(
+                status_code = 400,
+                detail = "The client filter must be a value greater than zero"
+            )
         query.append_whereclause(sales.c.client_id == client)
 
     if category is not None:
+        if category < 1:
+            raise HTTPException(
+                status_code = 400,
+                detail = "The category filter must be a value greater than zero"
+            )
+
         query.append_whereclause(sales.c.product_id == products.c.id)
         query.append_whereclause(products.c.category_id == category)
 
