@@ -47,7 +47,7 @@ func CreatePaymentMethod(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// format a response object
+	// res formats a response object
 	var res models.Response
 
 	res.Message = "Payment method created successfully"
