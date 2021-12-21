@@ -1,11 +1,11 @@
 package paymentmethods
 
 import (
-	"encoding/json" // "encoding/json" // package to encode and decode the json into struct and vice versa
-
-	"github.com/gorilla/mux" // used to get the params from the route
+	"encoding/json" // package to encode and decode the json into struct and vice versa
 	"log"
 	"net/http" // used to access the request and response object of the api
+	
+	"github.com/gorilla/mux" // used to get the params from the route
 
 	"github.com/jpgsaraceni/mvp-backend/payment_api/models"
 	pm_service "github.com/jpgsaraceni/mvp-backend/payment_api/services/payment_methods"
