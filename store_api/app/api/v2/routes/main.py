@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 from app.api.v2.routes.products import main as products_routes
-from app.api.v2.routes.sales import main as sales_routes
 from app.api.v2.routes.categories import main as categories_routes
 
 router = APIRouter(
@@ -9,5 +8,4 @@ router = APIRouter(
 )
 
 router.include_router(products_routes.router)
-router.include_router(sales_routes.router)
 router.include_router(categories_routes.router)
