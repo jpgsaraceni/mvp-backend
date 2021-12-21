@@ -8,11 +8,12 @@ import (
 	paymentsdb "github.com/jpgsaraceni/mvp-backend/payment_api/database"
 	"github.com/jpgsaraceni/mvp-backend/payment_api/models"
 
-	"github.com/joho/godotenv"
 	"strconv"
+
+	"github.com/joho/godotenv"
 )
 
-func CreatePaymentMethod(paymentMethod models.PaymentMethod) (int64, error) {
+func CreatePaymentMethod(paymentMethod models.PaymentMethod) (int, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
@@ -33,7 +34,7 @@ func CreatePaymentMethod(paymentMethod models.PaymentMethod) (int64, error) {
 		RETURNING id
 	`, os.Getenv("DB_SCHEMA"))
 
-	var id int64
+	var id int
 
 	err = db.QueryRow(sqlStatement, paymentMethod.Name).Scan(&id)
 
@@ -70,7 +71,6 @@ func GetSinglePaymentMethod(id string) (models.PaymentMethod, error) {
 			WHERE id = $1 AND inactivated_at IS NULL
 	`, os.Getenv("DB_SCHEMA"))
 
-
 	row := db.QueryRow(sqlStatement, id)
 
 	err = row.Scan(&method.ID, &method.Name)
@@ -78,9 +78,9 @@ func GetSinglePaymentMethod(id string) (models.PaymentMethod, error) {
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:
-			return method, &models.RequestError{Code:404, Message: "Payment method not found"}
+			return method, &models.RequestError{Code: 404, Message: "Payment method not found"}
 		default:
-			return method, &models.RequestError{Code:500, Message: "Unexpected failure while fetching data"}
+			return method, &models.RequestError{Code: 500, Message: "Unexpected failure while fetching data"}
 		}
 	}
 
@@ -129,7 +129,7 @@ func GetAllPaymentMethods() ([]models.PaymentMethod, error) {
 	return methods, err
 }
 
-func UpdatePaymentMethod(id int64, paymentMethod models.PaymentMethod) (int64, error) {
+func UpdatePaymentMethod(id int, paymentMethod models.PaymentMethod) (int, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
@@ -161,7 +161,7 @@ func UpdatePaymentMethod(id int64, paymentMethod models.PaymentMethod) (int64, e
 	return id, err
 }
 
-func DeletePaymentMethod(id int64) (int64, error) {
+func DeletePaymentMethod(id int) (int, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {

@@ -5,26 +5,26 @@ import (
 )
 
 type PaymentMethod struct {
-	ID   int64  `json:"id"`
+	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
 
 type Sale struct {
-	ID              int64   `json:"id"`
-	ClientId        int64   `json:"client_id"`
-	PaymentMethodId int64   `json:"payment_method_id"`
-	ProductId       int64   `json:"product_id"`
-	Amount          int64   `json:"amount"`
+	ID              int     `json:"id"`
+	ClientId        int     `json:"client_id"`
+	PaymentMethodId int     `json:"payment_method_id"`
+	ProductId       int     `json:"product_id"`
+	Amount          int     `json:"amount"`
 	Price           float64 `json:"price"`
 }
 
 type Response struct {
 	Message string `json:"message,omitempty"`
 	Data    struct {
-		InsertID  int64       `json:"insert_id,omitempty"`
-		UpdateID  int64       `json:"update_id,omitempty"`
-		DeleteID int64       `json:"deleted_id,omitempty"`
-		Value     interface{} `json:"value,omitempty"`
+		InsertID int         `json:"insert_id,omitempty"`
+		UpdateID int         `json:"update_id,omitempty"`
+		DeleteID int         `json:"deleted_id,omitempty"`
+		Value    interface{} `json:"value,omitempty"`
 	} `json:"data,omitempty"`
 }
 
@@ -39,7 +39,7 @@ type SalesFilter struct {
 }
 
 type RequestError struct {
-	Code    int64  `json:"code,omitempty"`
+	Code    int    `json:"code,omitempty"`
 	Message string `json:"message,omitempty"`
 }
 

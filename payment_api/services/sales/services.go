@@ -12,7 +12,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func CreateSale(sale models.Sale) (int64, error) {
+func CreateSale(sale models.Sale) (int, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
@@ -49,7 +49,7 @@ func CreateSale(sale models.Sale) (int64, error) {
 		RETURNING id
 	`, os.Getenv("DB_SCHEMA"))
 
-	var id int64
+	var id int
 
 	err = db.QueryRow(
 		sqlStatement,
