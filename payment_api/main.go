@@ -1,37 +1,28 @@
 package main
 
 import (
-	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
-
 	"github.com/joho/godotenv"
+	"github.com/jpgsaraceni/mvp-backend/payment_api/database"
+	"github.com/jpgsaraceni/mvp-backend/payment_api/routes"
 )
 
-// authorize receives a request and, if the method is POST, writes a json with status: accepted.
-func authorize(w http.ResponseWriter, req *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
-	if req.Method == "POST" {
-		response := map[string]string{
-			"payment": "confirmed",
-		}
-
-		json.NewEncoder(w).Encode(response)
-
-		return
-	}
-	http.Error(w, "Invalid request method.", http.StatusMethodNotAllowed)
-}
-
 func main() {
+	paymentsdb.SetUpDatabase()
+	
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
 
-	http.HandleFunc("/authorize", authorize)
-	log.Printf("Server started on port %s", os.Getenv("SERVER_PORT"))
-	log.Fatal(http.ListenAndServe(os.Getenv("SERVER_PORT"), nil))
+	r := payment_api_rotues.Router()
+
+	PORT := os.Getenv("SERVER_PORT")
+	STR_PORT := fmt.Sprintf(":%v", PORT)
+
+	log.Printf("Server started on port %s", PORT)
+	log.Fatal(http.ListenAndServe(STR_PORT, r))
 }
