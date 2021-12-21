@@ -1,7 +1,7 @@
 package purchase
 
 import (
-	"encoding/json" // "encoding/json" // package to encode and decode the json into struct and vice versa
+	"encoding/json" // package to encode and decode the json into struct and vice versa
 
 	"net/http" // used to access the request and response object of the api
 )
