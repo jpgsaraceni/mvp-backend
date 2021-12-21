@@ -56,7 +56,7 @@ Possible responses:
 GET /payment-methods/:id
 ```
 
-Return an especific payment method by its ID.
+Return a specific payment method by its ID.
 
 Possible responses:
 
