@@ -5,17 +5,18 @@ import (
 	"log"
 	"net/http"
 	"os"
+
 	"github.com/joho/godotenv"
-	"github.com/jpgsaraceni/mvp-backend/payment_api/database"
-	"github.com/jpgsaraceni/mvp-backend/payment_api/routes"
+	paymentsdb "github.com/jpgsaraceni/mvp-backend/payment_api/database"
+	payment_api_rotues "github.com/jpgsaraceni/mvp-backend/payment_api/routes"
 )
 
 func main() {
 	paymentsdb.SetUpDatabase()
-	
+
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Print("Error loading .env file")
 	}
 
 	r := payment_api_rotues.Router()

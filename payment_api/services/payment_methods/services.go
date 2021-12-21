@@ -3,7 +3,6 @@ package pm_service // payment methods service
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"os"
 
 	paymentsdb "github.com/jpgsaraceni/mvp-backend/payment_api/database"
@@ -17,7 +16,7 @@ func CreatePaymentMethod(paymentMethod models.PaymentMethod) (int64, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loadinf .env file")
+		fmt.Print("Error loadinf .env file")
 	}
 
 	if paymentMethod.Name == "" {
@@ -51,7 +50,7 @@ func GetSinglePaymentMethod(id string) (models.PaymentMethod, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Print("Error loading .env file")
 	}
 	numberID, err := strconv.Atoi(id)
 
@@ -92,7 +91,7 @@ func GetAllPaymentMethods() ([]models.PaymentMethod, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Print("Error loading .env file")
 	}
 
 	db := paymentsdb.CreateConnection()
@@ -134,7 +133,7 @@ func UpdatePaymentMethod(id int64, paymentMethod models.PaymentMethod) (int64, e
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loadinf .env file")
+		fmt.Print("Error loadinf .env file")
 	}
 
 	if paymentMethod.Name == "" {
@@ -166,7 +165,7 @@ func DeletePaymentMethod(id int64) (int64, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loadinf .env file")
+		fmt.Print("Error loadinf .env file")
 	}
 
 	db := paymentsdb.CreateConnection()

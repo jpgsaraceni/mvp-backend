@@ -2,7 +2,7 @@ package sales
 
 import (
 	"encoding/json" // package to encode and decode the json into struct and vice versa
-	"log"
+	"fmt"
 	"net/http" // used to access the request and response object of the api
 
 	"github.com/gorilla/mux" // used to get the params from the route
@@ -26,7 +26,7 @@ func CreateSale(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&sale)
 
 	if err != nil {
-		log.Fatalf("Unable to decode the request body %v", err)
+		fmt.Printf("Unable to decode the request body %v", err)
 	}
 
 	insertID, err := sl_service.CreateSale(sale)

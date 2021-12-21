@@ -2,9 +2,9 @@ package paymentmethods
 
 import (
 	"encoding/json" // package to encode and decode the json into struct and vice versa
-	"log"
+	"fmt"
 	"net/http" // used to access the request and response object of the api
-	
+
 	"github.com/gorilla/mux" // used to get the params from the route
 
 	"github.com/jpgsaraceni/mvp-backend/payment_api/models"
@@ -26,7 +26,7 @@ func CreatePaymentMethod(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&paymentMethod)
 
 	if err != nil {
-		log.Fatalf("Unable to decode the request body %v", err)
+		fmt.Printf("Unable to decode the request body %v", err)
 	}
 
 	insertID, err := pm_service.CreatePaymentMethod(paymentMethod)
@@ -38,12 +38,12 @@ func CreatePaymentMethod(w http.ResponseWriter, r *http.Request) {
 			res.Message = e.Message
 			w.WriteHeader(int(e.Code))
 			json.NewEncoder(w).Encode(res)
-			
+
 		default:
 			res.Message = "Unexpected failure"
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(res)
-		}	
+		}
 		return
 	}
 
@@ -84,7 +84,7 @@ func GetPaymentMethodByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var res models.Response
-	var methods[] models.PaymentMethod
+	var methods []models.PaymentMethod
 
 	res.Message = "Payment method fetched successfully"
 	res.Data.Value = append(methods, method)
@@ -101,7 +101,7 @@ func GetAllPaymentMethods(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		var res models.Detail
 		switch e := err.(type) {
-		case *models.RequestError: 
+		case *models.RequestError:
 			res.Message = e.Message
 			w.WriteHeader(int(e.Code))
 			json.NewEncoder(w).Encode(res)
@@ -238,4 +238,3 @@ func DeletePaymentMethod(w http.ResponseWriter, r *http.Request) {
 	res.Data.DeleteID = deletedID
 	json.NewEncoder(w).Encode(res)
 }
-

@@ -3,7 +3,6 @@ package sl_service // sales service
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"os"
 	"strconv"
 
@@ -17,7 +16,7 @@ func CreateSale(sale models.Sale) (int64, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Print("Error loading .env file")
 	}
 
 	if sale.Amount < 1 {
@@ -54,12 +53,12 @@ func CreateSale(sale models.Sale) (int64, error) {
 
 	err = db.QueryRow(
 		sqlStatement,
-			sale.ClientId,
-			sale.ProductId,
-			sale.PaymentMethodId,
-			sale.Amount,
-			sale.Price,
-		).Scan(&id)
+		sale.ClientId,
+		sale.ProductId,
+		sale.PaymentMethodId,
+		sale.Amount,
+		sale.Price,
+	).Scan(&id)
 
 	if err != nil {
 		return 0, &models.RequestError{Code: 500, Message: "Unable to create sale"}
@@ -72,7 +71,7 @@ func GetAllSales(filter models.SalesFilter) ([]models.Sale, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Print("Error loading .env file")
 	}
 
 	filterByClient := ""
@@ -124,7 +123,7 @@ func GetAllSales(filter models.SalesFilter) ([]models.Sale, error) {
 	sqlStatement := fmt.Sprintf(`
 		SELECT id, client_id, product_id, payment_method_id, amount, price
 			FROM %v.sales`,
-	os.Getenv("DB_SCHEMA"))
+		os.Getenv("DB_SCHEMA"))
 
 	if filterByClient != "" {
 		sqlStatement = fmt.Sprintf(`
@@ -181,7 +180,7 @@ func GetSingleSale(id string) (models.Sale, error) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Print("Error loading .env file")
 	}
 
 	numberID, err := strconv.Atoi(id)
@@ -203,7 +202,6 @@ func GetSingleSale(id string) (models.Sale, error) {
 			WHERE id = $1
 	`, os.Getenv("DB_SCHEMA"))
 
-
 	row := db.QueryRow(sqlStatement, id)
 
 	err = row.Scan(&sale.ID, &sale.ClientId, &sale.ProductId, &sale.PaymentMethodId, &sale.Amount, &sale.Price)
@@ -211,9 +209,9 @@ func GetSingleSale(id string) (models.Sale, error) {
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:
-			return sale, &models.RequestError{Code:404, Message: "Sale not found"}
+			return sale, &models.RequestError{Code: 404, Message: "Sale not found"}
 		default:
-			return sale, &models.RequestError{Code:500, Message: "Unexpected failure while fetching data"}
+			return sale, &models.RequestError{Code: 500, Message: "Unexpected failure while fetching data"}
 		}
 	}
 

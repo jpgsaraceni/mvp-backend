@@ -3,7 +3,6 @@ package paymentsdb
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"os"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq" 
@@ -14,7 +13,7 @@ func CreateConnection() *sql.DB {
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Print("Error loading .env file")
 	}
 
 	url := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable",
@@ -51,7 +50,7 @@ func SetUpDatabase() {
 	_, errCreating := db.Query(sqlStatement)
 
 	if errCreating != nil {
-		log.Fatalf("Unable to execute the query. %v", errCreating)
+		fmt.Printf("Unable to execute the query. %v", errCreating)
 	}
 
 	createPaymentMethodsTable(db)
@@ -64,7 +63,7 @@ func createPaymentMethodsTable(db *sql.DB) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Print("Error loading .env file")
 	}
 
 	sqlStatement := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %v.payment_methods (
@@ -79,7 +78,7 @@ func createPaymentMethodsTable(db *sql.DB) {
 	_, errCreating := db.Query(sqlStatement)
 
 	if errCreating != nil {
-		log.Fatalf("Unable to execute the query. %v", errCreating)
+		fmt.Printf("Unable to execute the query. %v", errCreating)
 	}
 
 	return
@@ -89,7 +88,7 @@ func createSalesTable(db *sql.DB) {
 	err := godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Print("Error loading .env file")
 	}
 
 	sqlStatement := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %v.sales (
@@ -112,7 +111,7 @@ func createSalesTable(db *sql.DB) {
 	_, errCreating := db.Query(sqlStatement)
 
 	if errCreating != nil {
-		log.Fatalf("Unable to execute the query. %v", errCreating)
+		fmt.Printf("Unable to execute the query. %v", errCreating)
 	}
 
 	return
