@@ -197,7 +197,7 @@ This API accepts the following methods on `/sales`:
 GET /sales?client={int}&product={int}&payment-method={int}
 ```
 
-Return all sales, accepts filter by `client` ID, `product` ID and `payment-method` ID.
+Returns all sales, accepts filter by `client` ID, `product` ID and `payment-method` ID.
 
 Possible responses:
 ```json
