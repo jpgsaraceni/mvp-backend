@@ -240,7 +240,7 @@ Possible responses:
 GET /sales/:id
 ```
 
-Return an especific sale by its ID. Possible responses:
+Return a specific sale by its ID. Possible responses:
 
 ```json
 - STATUS CODE 200 OK
