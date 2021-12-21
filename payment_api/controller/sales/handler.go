@@ -19,7 +19,7 @@ func CreateSale(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	// create an empty payment method of type models.PaymentMethod
+	// sale creates an empty payment method of type models.PaymentMethod
 	var sale models.Sale
 
 	// decode the json request to paymentMethod
