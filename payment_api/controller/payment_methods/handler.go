@@ -152,7 +152,7 @@ func UpdatePaymentMethod(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// create an empty payment method of type models.PaymentMethod
+	// updateMethod creates an empty payment method of type models.PaymentMethod
 	var updatedMethod models.PaymentMethod
 
 	// decode the json request to paymentMethod
