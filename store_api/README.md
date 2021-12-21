@@ -1,7 +1,12 @@
 # STORE API
 
+### Version 1
 This API is responsible for managing the store products.
 You can create, read, update and delete products using it.
+
+### Version 2
+This API is responsible for managing the store products, its categories and the sales.
+You can create, read, update and delete products and categories using it, create read and delete sales.
 
 ## Testing locally
 ### Requirements:
