@@ -64,7 +64,7 @@ products = Table (
 
 # define table sales
 sales = Table(
-    'sales',
+    'store_sales',
     metadata,
     Column('id', Integer, primary_key=True),
     Column('client_id', Integer, nullable=False),
