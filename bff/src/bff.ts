@@ -36,7 +36,7 @@ app.post('/ranking', async (req: Request, res: Response) => {
 
 app.get('/products', async (req: Request, res: Response) => {
   axios
-    .get(`${process.env.STORE_API}/v1/products`)
+    .get(`${process.env.STORE_API}/v2/products`)
     .then((response) => {
       res.status(200).send(response.data);
     })
@@ -51,7 +51,7 @@ app.get('/product', async (req: Request, res: Response) => {
     res.status(400).send({ error: 'Please provide an ID' });
   } else {
     axios
-      .get(`${process.env.STORE_API}/v1/products/${productid}`)
+      .get(`${process.env.STORE_API}/v2/products/${productid}`)
       .then((response) => {
         res.status(200).send(response.data);
       })
@@ -86,7 +86,7 @@ app.post('/purchase/:product_id', async (req: Request, res: Response) => {
           axios
             .post(`${process.env.PAYMENT_API}/authorize`, null, {
               headers: {
-                Authorization: 'Bearer ' + onlyjwt,
+                Authorization: 'Basic ' + onlyjwt,
               },
             })
             .then(() => {
@@ -94,8 +94,8 @@ app.post('/purchase/:product_id', async (req: Request, res: Response) => {
             });
         })
         .catch((err) => {
-          if(err.response.status == 404) {
-            res.status(404).send({error: "Product not found"});
+          if (err.response.status == 404) {
+            res.status(404).send({ error: 'Product not found' });
           } else {
             res.status(500).send({ error: 'Internal error' });
           }
@@ -130,23 +130,27 @@ app.post('/register', async (req: Request, res: Response) => {
 });
 
 app.post('/login', async (req: Request, res: Response) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const token = req.headers.authorization;
 
-  axios
-    .post(`${process.env.SESSION_API}/login`, {
-      email: email,
-      password: password,
-    })
-    .then((response) => {
-      res.status(200).send(response.data);
-    })
-    .catch((err) => {
-      if (err.response.status == 400) {
-        res.status(401).send({ error: 'Invalid email/password or token' });
-      } else {
-        res.status(500).send({ error: 'Internal error' });
-      }
-    });
+  if (!token) {
+    res.status(401).send({ error: 'No Token Provided' });
+  } else {
+    axios
+      .post(`${process.env.SESSION_API}/login`, null, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      })
+      .then((response) => {
+        res.status(200).send(response.data);
+      })
+      .catch((err) => {
+        if (err.response.status == 401) {
+          res.status(401).send({ error: 'Invalid email/password or token' });
+        } else {
+          res.status(500).send({ error: 'Internal error' });
+        }
+      });
+  }
 });
 export default app;
