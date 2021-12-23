@@ -1,4 +1,4 @@
-import "dotenv/config";
+import dotenv from "dotenv";
 import express from "express";
 import fs from "fs";
 import * as path from "path";
@@ -9,6 +9,7 @@ import { limiter, slower } from "@middlewares/rateLimit";
 import cors from "cors";
 import { ICommon } from "./ICommon";
 import { HandleError } from "./middlewares/HandleError";
+dotenv.config();
 
 const app = express();
 
@@ -35,7 +36,7 @@ const accessLogStream = fs.createWriteStream(
 );
 
 const corsOptions = {
-  origin: "*",
+  origin: `${process.env.BFF_URL}`,
   credentials: true,
 };
 
