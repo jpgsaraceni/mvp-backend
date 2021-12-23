@@ -9,5 +9,6 @@ const router = Router();
 router.post('/register', validate.check(), new RegisterController().handle);
 router.post('/login', new LoginController().handle);
 router.get('/coins', new CoinsController().handle);
+router.put('/coins', new CoinsController().update);
 
 export default router;
