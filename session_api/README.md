@@ -31,6 +31,37 @@ To run this project, you will need to add the following environment variables to
 * **Content:** `{ id: 4, "email": "coolemail@hotmail.com", name: "coolname", password: "coolbcryptpassword", "created_at": "cool date" }`
 &nbsp;
 
+#### Get coins
+
+```http
+  GET /coins
+```
+
+| Cookies      | Type     | Description                         |
+| :-------- | :------- | :-------------------------          |
+| `auth`    | `string` | **Required**. Person's JWT Cookie         |
+
+### Expected response
+
+* **Content:** `{ 20 }`
+&nbsp;
+
+#### Update coins
+
+```http
+  PUT /coins
+```
+
+| Cookies/Body      | Type     | Description                         |
+| :-------- | :------- | :-------------------------          |
+| `auth`(cookie)    | `string` | **Required**. Person's JWT Cookie         |
+| `coins`(body)    | `number` | **Required**. Person's coins to update         |
+
+### Expected response
+
+* **Content:** `{ 40 }`
+&nbsp;
+
 #### Login an user
 
 ```http

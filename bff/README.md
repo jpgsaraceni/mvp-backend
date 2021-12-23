@@ -105,10 +105,34 @@ API for handle all the requests
 | `email`      | `string` | **Required**. Person's email |
 | `password`   | `string` | **Required**. Person's password |
 
+#### Get coins
+
+```http
+  GET /coins
+```
+
+| Cookies      | Type     | Description                         |
+| :-------- | :------- | :-------------------------          |
+| `auth`    | `string` | **Required**. Person's JWT Cookie         |
+
 ### Expected response
 
-* **Content:** `{ "id": 1, "name": cool name, "token": cool jwt token }`
-&nbsp;
+* **Content:** `{ 40 }`
+
+#### Update coins
+
+```http
+  PUT /coins
+```
+
+| Cookies/Body      | Type     | Description                         |
+| :-------- | :------- | :-------------------------          |
+| `auth`(cookie)    | `string` | **Required**. Person's JWT Cookie         |
+| `coins`(body)    | `number` | **Required**. Person's coins to update         |
+
+### Expected response
+
+* **Content:** `{ 40 }`
 
 ## Run this api Locally
 
