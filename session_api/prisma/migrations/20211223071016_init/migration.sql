@@ -5,6 +5,7 @@ CREATE TABLE "Users" (
     "name" VARCHAR NOT NULL,
     "password" VARCHAR NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "coins" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "Users_pkey" PRIMARY KEY ("id")
 );
@@ -16,6 +17,7 @@ CREATE TABLE "Users_Mock" (
     "name" VARCHAR NOT NULL,
     "password" VARCHAR NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "coins" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "Users_Mock_pkey" PRIMARY KEY ("id")
 );

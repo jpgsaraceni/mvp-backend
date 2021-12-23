@@ -1,6 +1,7 @@
 import express from "express";
 import compression from "compression";
 import cors from "cors";
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -13,6 +14,7 @@ const corsOptions = {
     credentials: true,
 };
 
+app.use(cookieParser());
 app.use(cors(corsOptions));
 
 export default app;
