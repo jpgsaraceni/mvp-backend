@@ -90,6 +90,32 @@ app.get('/coins', async (req: Request, res: Response) => {
   }
 })
 
+app.put('/coins', async (req: Request, res: Response) => {
+  if (!req.headers.authorization) {
+    res.send({ error: 'Token not found' });
+  } else {
+    const coins = req.body.coins;
+    const [, userToken]: any = req.headers.authorization?.split(" ");
+    axios.put(`${process.env.SESSION_API}/coins`, {
+      coins: coins
+    }, {
+      headers: {
+        Authorization: 'Basic ' + userToken,
+      },
+    }).then((response) => {
+      res.status(200).send(response.data.toString())
+    }).catch((err) => {
+      if(err.response.status == 400) {
+        res.status(400).send({error: "Invalid token"});
+      } else if(err.response.status == 404) {
+        res.status(404).send({error: "User not found"});
+      } else {
+        res.status(500).send({error: "Internal error"})
+      }
+    })
+  }
+})
+
 app.post('/purchase/:product_id', async (req: Request, res: Response) => {
   const productid = Number(req.params.product_id);
   const paymentMethodID = req.body.payment_method;
