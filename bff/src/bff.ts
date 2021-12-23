@@ -91,30 +91,64 @@ app.get('/coins', async (req: Request, res: Response) => {
 })
 
 app.post('/purchase/:product_id', async (req: Request, res: Response) => {
-  const productid = req.params.product_id;
+  const productid = Number(req.params.product_id);
+  const paymentMethodID = req.body.payment_method;
+  const amount = req.body.amount;
 
   if (!req.headers.authorization) {
     res.status(400).send({ error: 'Token not found' });
   } else if (!productid) {
     res.status(400).send({ error: 'Please provide a product ID' });
   } else {
-    const [, onlyjwt]: any = req.headers.authorization?.split(' ');
+    const jwtToken: string = req.headers.authorization;
     const secret = process.env.SECRET;
     try {
-      jwt.verify(onlyjwt, secret as string);
+      const stringUser = jwt.verify(jwtToken, secret as string);
+      const user = JSON.parse(JSON.stringify(stringUser));
 
       axios
-        .get(`${process.env.CURRENT_API}/products/${productid}`)
+        .get(`${process.env.CURRENT_API}/product?product_id=${productid}`)
         .then((response) => {
-          axios
-            .post(`${process.env.PAYMENT_API}/authorize`, null, {
-              headers: {
-                Authorization: 'Basic ' + onlyjwt,
-              },
-            })
-            .then(() => {
-              res.status(200).send(response.data);
-            });
+            const productPrice = response.data.price;
+
+            axios
+              .get(`${process.env.CURRENT_API}/payment-method/${paymentMethodID}`)
+              .then(() => {
+                axios
+                  .post(`${process.env.PAYMENT_API}/authorize`, null, {
+                    headers: {
+                      Authorization: 'Basic ' + jwtToken,
+                    }
+                  })
+                  .then((response) => {
+                    axios
+                      .post(`${process.env.PAYMENT_API}/sales`, {
+                        "client_id": user.id,
+                        "product_id": productid,
+                        "payment_method_id": paymentMethodID,
+                        "amount": amount || 1,
+                        "price": productPrice
+                      })
+                      .then((response) => {
+                        delete response.data.data;
+                        res.status(200).send(response.data);
+                      })
+                      .catch((err) => {
+                        if (err.response.status == 422) {
+                          res.status(422).send({ error: 'Unable to create sale' });
+                        } else {
+                          res.status(500).send({ error: 'Internal error' });
+                        }
+                      })
+                  });
+              })
+              .catch((err) => {
+                if (err.response.status == 404) {
+                  res.status(404).send({ error: 'Payment method not found' });
+                } else {
+                  res.status(500).send({ error: 'Internal error' });
+                }
+              })
         })
         .catch((err) => {
           if (err.response.status == 404) {
@@ -176,4 +210,49 @@ app.post('/login', async (req: Request, res: Response) => {
       });
   }
 });
+
+app.get('/payment-methods', async (req: Request, res: Response) => {
+  axios
+    .get(`${process.env.PAYMENT_API}/payment-methods`)
+    .then((response) => {
+      res.status(200).send(response.data.data.value);
+    })
+    .catch((err) => {
+      res.status(500).send({ error: 'Cannot retrieve all the payment methods, check payment API logs for details' });
+    });
+});
+
+app.get('/payment-method/:id', async (req: Request, res: Response) => {
+  const paymentMethodID = req.params.id;
+  if (!paymentMethodID) {
+    res.status(400).send({ error: 'Please provide an ID' });
+  } else {
+    axios
+      .get(`${process.env.PAYMENT_API}/payment-methods/${paymentMethodID}`)
+      .then((response) => {
+        res.status(200).send(response.data.data.value);
+      })
+      .catch((err) => {
+        if (err.response.status == 400) {
+          res.status(400).send(err);
+        } else if (err.response.status == 404) {
+          res.status(404).send({ error: 'Payment method not found' });
+        } else {
+          res.status(500).send({ error: 'Cannot retrieve this payment methods, check payment API logs for details' });
+        }
+      });
+  }
+});
+
+app.get('/products/categories', (req: Request, res: Response) => {
+  axios
+  .get(`${process.env.STORE_API}/v2/categories`)
+  .then((response) => {
+    res.status(200).send(response.data);
+  })
+  .catch(() => {
+    res.status(500).send({ error: 'Cannot retrieve all the categories, check categories API logs for details' });
+  });
+})
+
 export default app;
