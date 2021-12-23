@@ -32,6 +32,49 @@ API for handle all the requests
 * **Content:** `{ success: "Ranking added" }`
 &nbsp;
 
+#### Return all categories
+```http
+GET /products/categories
+```
+* **Content:**
+
+```
+[
+  { id : 1, name : "cool category1", description: "cool description1" }
+  { id : 2, name : "cool category2", description: "cool description2" }
+]
+```
+&nbsp;
+
+#### Return all payment methods
+```http
+GET /payment-methods
+```
+* **Content:**
+
+```
+[
+  { id : 1, name : "cool method1" }
+  { id : 2, name : "cool method2" }
+]
+```
+&nbsp;
+
+#### Get one payment method
+
+```http
+  GET /payment-method/:id
+```
+
+| Params      | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `number` | **Required**. Payment method's ID |
+
+### Expected response
+
+* **Content:** `[{ id : 1, name : "cool method1" }]`
+&nbsp;
+
 #### Return all products
 
 ```http
@@ -72,9 +115,14 @@ API for handle all the requests
 | :-------- | :------- | :-------------------------------- |
 | `product_id`      | `number` | **Required**. Product's ID |
 
+| Body      | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `payment_method`      | `number` | **Required**. Payment method ID |
+| `amount`      | `number` | **Optional** Amount of products (default to 1)|
+
 ### Expected response
 
-* **Content:** `{ "payment": "confirmed" }`
+* **Content:** `{ "message": "Sale created successfully" }`
 &nbsp;
 
 #### Register an account

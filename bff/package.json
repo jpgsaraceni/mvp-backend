@@ -5,7 +5,7 @@
   "author": "Torre de Babel",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
+    "dev": "ts-node-dev src/server.ts -r --no-notify --exit-child",
     "copy-logs": "cp -r ./src/logs/ ./dist/logs/",
     "build": "npx ttsc",
     "build:docker": "npx ttsc && npx prisma migrate dev --name init && npm run start:prod:docker:watch",
